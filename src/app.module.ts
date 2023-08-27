@@ -18,11 +18,11 @@ const sessions = new LocalSession({ database: 'session_db.json' })
 		}),
 		TypeOrmModule.forRoot({
 			type: 'postgres',
-			host: '10.11.1.199',
+			host: 'dpg-cjlq587v9s6c73bsmf9g-a',
 			port: 5432,
 			database: 'testtodo',
-			username: 'postgres',
-			password: 'postgres',
+			username: 'pguser',
+			password: 'ej2PvkhWINlJuIbSNSuO7KPihlgbBsaC',
 			entities: [join(__dirname, '**', '*.entity.{ts,js}')],
 			migrations: [join(__dirname, '**', '*.migration.{ts,js}')],
 			synchronize: true
