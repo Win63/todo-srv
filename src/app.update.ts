@@ -23,7 +23,14 @@ export class AppUpdate {
 	@Start()
 	async startCommand(ctx: Context) {
 		await ctx.reply('Hi! Friend 👋')
-		await ctx.reply('Что ты хочешь сделать?', actionButtons())
+		await ctx.reply('Запиши свои планы на день, чтобы ничего не забыть!',
+		{ reply_markup: {
+            inline_keyboard: [
+				[ { text: "Мои задачи", web_app: {
+					 url: "https://jovial-marigold-efa6c9.netlify.app/" }
+				} ]
+			]
+        }})
 	}
 
 	@Hears('⚡️ Создать задачу')
