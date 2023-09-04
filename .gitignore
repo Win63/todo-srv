@@ -1,6 +1,7 @@
 # compiled output
 /dist
 /node_modules
+%USERPROFILE%/AppData/Roaming/
 
 # Logs
 logs

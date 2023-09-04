@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { TaskEntity } from './task.entity'
+import { TaskEntity } from './tasks/entities/task.entity'
 
 @Injectable()
 export class AppService {
@@ -10,8 +10,18 @@ export class AppService {
 		private readonly taskRepository: Repository<TaskEntity>
 	) {}
 
-	async getAll() {
-		return this.taskRepository.find()
+	async getAll(userId: number, dateDo: Date) {
+		return this.taskRepository.find({
+			/*relations: {
+				taskUser: true,
+			},*/
+			where: {
+				dateDo : dateDo,
+				taskUser: {
+					id: userId
+				}
+			},
+		})
 	}
 
 	async getById(id: number) {
@@ -22,7 +32,6 @@ export class AppService {
 		const task = await this.taskRepository.create({ name })
 
 		await this.taskRepository.save(task)
-		return this.getAll()
 	}
 
 	async doneTask(id: number) {
@@ -31,7 +40,6 @@ export class AppService {
 
 		task.isCompleted = !task.isCompleted
 		await this.taskRepository.save(task)
-		return this.getAll()
 	}
 
 	async editTask(id: number, name: string) {
@@ -40,8 +48,6 @@ export class AppService {
 
 		task.name = name
 		await this.taskRepository.save(task)
-
-		return this.getAll()
 	}
 
 	async deleteTask(id: number) {
@@ -49,6 +55,5 @@ export class AppService {
 		if (!task) return null
 
 		await this.taskRepository.delete({ id })
-		return this.getAll()
 	}
 }

@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from 'typeorm'
-import { TaskUserEntity } from './taskUser.entity'
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, JoinColumn, ManyToOne } from 'typeorm'
+import { TaskUserEntity } from '../../users/entities/taskUser.entity'
+//import { Transform } from 'class-transformer';
 
 @Entity({ name: 'Task' })
 export class TaskEntity {
@@ -21,10 +22,10 @@ export class TaskEntity {
 	@UpdateDateColumn()
 	dateUpdate: Date
 
-	@Column()
+	@Column({ type: "date"})
 	dateDo: Date
 
-	@OneToOne(() => TaskUserEntity)
+	@ManyToOne(() => TaskUserEntity)
     @JoinColumn()
 	taskUser: TaskUserEntity
 

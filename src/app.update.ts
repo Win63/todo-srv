@@ -41,7 +41,7 @@ export class AppUpdate {
 
 	@Hears('📋 Список задач')
 	async listTask(ctx: Context) {
-		const todos = await this.appService.getAll()
+		const todos = await this.appService.getAll(1, new Date())
 		await ctx.reply(showList(todos))
 	}
 

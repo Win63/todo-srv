@@ -8,15 +8,18 @@ export class TaskUserEntity {
 	@Column()
 	name: string
 
+	@Column({nullable: true})
+	tgId: number
+
 	@Column()
 	tglogin: string
 
 	@CreateDateColumn()
 	dateCreate: Date
 
-	@Column()
-	phone: string
+	@Column({nullable: true})
+	phone?: string | null
 
-	@Column()
-	email: string
+	@Column({nullable: true})
+	email?: string | null
 }

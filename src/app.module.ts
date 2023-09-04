@@ -6,7 +6,10 @@ import * as LocalSession from 'telegraf-session-local'
 import { AppService } from './app.service'
 import { AppUpdate } from './app.update'
 import { TG_TOKEN } from './config'
-import { TaskEntity } from './task.entity'
+import { TaskEntity } from './tasks/entities/task.entity'
+import { TasksModule } from './tasks/tasks.module';
+import { UsersModule } from './users/users.module';
+import { TaskUserEntity } from './users/entities/taskUser.entity'
 
 const sessions = new LocalSession({ database: 'session_db.json' })
 
@@ -27,7 +30,10 @@ const sessions = new LocalSession({ database: 'session_db.json' })
 			migrations: [join(__dirname, '**', '*.migration.{ts,js}')],
 			synchronize: true
 		}),
-		TypeOrmModule.forFeature([TaskEntity])
+		TypeOrmModule.forFeature([TaskEntity]),
+		TypeOrmModule.forFeature([TaskUserEntity]),
+		TasksModule,
+		UsersModule
 	],
 	providers: [AppService, AppUpdate]
 })
